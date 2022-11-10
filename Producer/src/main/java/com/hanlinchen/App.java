@@ -18,6 +18,12 @@ public class App
             producerClient.syncSend(key, val);
         });
             
+        countries.forEach((key, val)->{
+            producerClient.asyncSend(key, val);
+        });
+
+        producerClient.getKafkaProducer().flush();
+        producerClient.getKafkaProducer().close();
    
     }
 }

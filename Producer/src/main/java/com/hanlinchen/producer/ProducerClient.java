@@ -1,10 +1,15 @@
 package com.hanlinchen.producer;
 
+import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+
+import lombok.Data;
+
 import java.util.Properties;
 
+@Data
 public class ProducerClient {
     final private KafkaProducer kafkaProducer;
     
@@ -25,4 +30,22 @@ public class ProducerClient {
               e.printStackTrace();
         }
     }
+
+    public void asyncSend(String key, String val){
+ 
+            ProducerRecord<String, String> record = new ProducerRecord<>("country", key, val);
+            kafkaProducer.send(record, new  Callback() {
+                @Override
+                public void onCompletion(RecordMetadata recordMetadata, Exception e) {
+                    if (e == null){
+                        System.out.println(recordMetadata.toString());
+                    }
+                    else{
+                        e.printStackTrace();
+                    }
+                }
+            });
+    }
+
+    
 }
