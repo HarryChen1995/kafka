@@ -1,5 +1,4 @@
 package com.hanlinchen;
-import java.util.Properties;
 import java.util.HashMap;
 import java.util.Map;
 import com.hanlinchen.producer.ProducerClient;
