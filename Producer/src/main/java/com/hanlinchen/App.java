@@ -3,6 +3,8 @@ import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;;
 public class App 
 {
     public static void main( String[] args )
@@ -13,9 +15,16 @@ public class App
         kafkaProps.put("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
         kafkaProps.put("value.serializer","org.apache.kafka.common.serialization.StringSerializer");
         KafkaProducer producer = new KafkaProducer<String, String>(kafkaProps);
-        ProducerRecord<String, String> record = new ProducerRecord<>("country", "Precision Products", "Japan");
+        Map<String, String> countries = new HashMap<>();
+        countries.put("america", "Washinton");
+        countries.put("china", "Beijin");
+
         try {
-            producer.send(record);
+            countries.forEach((key, val)->{
+                ProducerRecord<String, String> record = new ProducerRecord<>("country", key, val);
+                producer.send(record);
+            });
+            
         } 
         catch (Exception e) {
             e.printStackTrace();
