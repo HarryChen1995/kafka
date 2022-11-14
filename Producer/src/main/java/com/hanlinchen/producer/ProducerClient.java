@@ -11,7 +11,7 @@ import java.util.Properties;
 
 @Data
 public class ProducerClient {
-    final private KafkaProducer kafkaProducer;
+    final private KafkaProducer<String, String> kafkaProducer;
     
     public ProducerClient(){
         Properties kafkaProps = new Properties();
