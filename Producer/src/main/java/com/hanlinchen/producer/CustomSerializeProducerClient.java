@@ -1,6 +1,7 @@
 package com.hanlinchen.producer;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.errors.SerializationException;
@@ -21,6 +22,8 @@ public class CustomSerializeProducerClient {
         kafkaProps.put("bootstrap.servers", "localhost:9092");
         kafkaProps.put("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
         kafkaProps.put("value.serializer","com.hanlinchen.serializer.CountrySerializer");
+        kafkaProps.put("partitioner.class", "com.hanlinchen.partition.CustomPartitioner");
+    
         kafkaProducer = new KafkaProducer<String , Country>(kafkaProps);
     }
 
