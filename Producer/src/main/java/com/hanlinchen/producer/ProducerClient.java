@@ -2,6 +2,7 @@ package com.hanlinchen.producer;
 
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
@@ -15,9 +16,9 @@ public class ProducerClient {
     
     public ProducerClient(){
         Properties kafkaProps = new Properties();
-        kafkaProps.put("bootstrap.servers", "localhost:9092");
-        kafkaProps.put("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
-        kafkaProps.put("value.serializer","org.apache.kafka.common.serialization.StringSerializer");
+        kafkaProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        kafkaProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringSerializer");
+        kafkaProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringSerializer");
         kafkaProducer = new KafkaProducer<String, String>(kafkaProps);
     }
 

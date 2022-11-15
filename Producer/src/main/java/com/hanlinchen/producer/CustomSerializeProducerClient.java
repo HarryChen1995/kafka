@@ -19,10 +19,10 @@ public class CustomSerializeProducerClient {
 
     public CustomSerializeProducerClient() {
         Properties kafkaProps = new Properties();
-        kafkaProps.put("bootstrap.servers", "localhost:9092");
-        kafkaProps.put("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
-        kafkaProps.put("value.serializer","com.hanlinchen.serializer.CountrySerializer");
-        kafkaProps.put("partitioner.class", "com.hanlinchen.partition.CustomPartitioner");
+        kafkaProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        kafkaProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringSerializer");
+        kafkaProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,"com.hanlinchen.serializer.CountrySerializer");
+        kafkaProps.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, "com.hanlinchen.partition.CustomPartitioner");
     
         kafkaProducer = new KafkaProducer<String , Country>(kafkaProps);
     }
